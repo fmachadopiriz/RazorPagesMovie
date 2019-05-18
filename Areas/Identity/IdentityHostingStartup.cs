@@ -18,7 +18,7 @@ namespace RazorPagesMovie.Areas.Identity
                 services.AddDbContext<RazorPagesMovieIdentityDbContext>(options =>
                    options.UseSqlite(context.Configuration.GetConnectionString("MovieContext")));
 
-                services.AddDefaultIdentity<IdentityUser>()
+                services.AddDefaultIdentity<RazorPagesMovieUser>()
                     .AddEntityFrameworkStores<RazorPagesMovieIdentityDbContext>();
             });
         }

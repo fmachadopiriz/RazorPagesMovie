@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie.Areas.Identity.Data
 {
-    public class RazorPagesMovieIdentityDbContext : IdentityDbContext<IdentityUser>
+    public class RazorPagesMovieIdentityDbContext : IdentityDbContext<RazorPagesMovieUser>
     {
         public RazorPagesMovieIdentityDbContext(DbContextOptions<RazorPagesMovieIdentityDbContext> options)
             : base(options)

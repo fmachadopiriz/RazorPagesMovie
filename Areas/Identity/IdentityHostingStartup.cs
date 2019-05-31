@@ -15,9 +15,6 @@ namespace RazorPagesMovie.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<RazorPagesMovieIdentityDbContext>(options =>
-                   options.UseSqlite(context.Configuration.GetConnectionString("MovieContext")));
-
                 services.AddDefaultIdentity<RazorPagesMovieUser>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<RazorPagesMovieIdentityDbContext>();

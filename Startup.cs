@@ -13,6 +13,7 @@ using RazorPagesMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie
 {
@@ -37,6 +38,13 @@ namespace RazorPagesMovie
 
             services.AddDbContext<RazorPagesMovieContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
+
+            // Fix error More than one DbContext named 'RazorPagesMovieIdentityDbContext' was found Specify which one to use by providing
+            // its fully qualified name using exact case when running dotnet aspnet-codegenerator razorpage -m RazorPagesMovieUser
+            // -dc RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext -udl -outDir Areas\Identity\Pages\RazorPagesMovieUsers
+            // --referenceScriptLibraries
+            services.AddDbContext<RazorPagesMovieIdentityDbContext>(options =>
+                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
 
             services.AddMvc(config =>
             {

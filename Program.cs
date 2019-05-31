@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using RazorPagesMovie.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
+using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie
 {
@@ -24,6 +25,7 @@ namespace RazorPagesMovie
                         GetRequiredService<RazorPagesMovieContext>();
                     context.Database.Migrate();
                     SeedData.Initialize(services);
+                    SeedIdentityData.Initialize(services);
                 }
                 catch (Exception ex)
                 {

@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RazorPagesMovie.Areas.Identity.Data;
 
-namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
+namespace RazorPagesMovie.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class RazorPagesMovieIdentityDbContextModelSnapshot : ModelSnapshot
+    partial class IdentityContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -127,7 +127,7 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieUser", b =>
+            modelBuilder.Entity("RazorPagesMovie.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -162,6 +162,8 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("Role");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -191,7 +193,7 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieUser")
+                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -199,7 +201,7 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieUser")
+                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -212,7 +214,7 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieUser")
+                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -220,7 +222,7 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieUser")
+                    b.HasOne("RazorPagesMovie.Areas.Identity.Data.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

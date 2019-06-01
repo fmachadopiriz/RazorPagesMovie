@@ -40,8 +40,8 @@ namespace RazorPagesMovie
                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
 
             // Fix error More than one DbContext named 'RazorPagesMovieIdentityDbContext' was found Specify which one to use by providing
-            // its fully qualified name using exact case when running dotnet aspnet-codegenerator razorpage -m RazorPagesMovieUser
-            // -dc RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext -udl -outDir Areas\Identity\Pages\RazorPagesMovieUsers
+            // its fully qualified name using exact case when running dotnet aspnet-codegenerator razorpage -m ApplicationUser
+            // -dc RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext -udl -outDir Areas\Identity\Pages\ApplicationUsers
             // --referenceScriptLibraries
             services.AddDbContext<IdentityContext>(options =>
                  options.UseSqlite(Configuration.GetConnectionString("MovieContext")));

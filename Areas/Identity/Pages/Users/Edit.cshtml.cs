@@ -88,7 +88,7 @@ namespace RazorPagesMovie.Areas.Identity.Pages.Users
 
             // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquí para poder
             // buscar por rol después cuando no hay acceso a RoleManager.
-            user.Role = roleToAdd.Name;
+            user.AssignRole(_userManager, roleToAdd.Name);
 
             await _userManager.UpdateAsync(user);
 

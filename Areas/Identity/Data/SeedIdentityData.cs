@@ -9,13 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace RazorPagesMovie.Areas.Identity.Data
 {
     /// <summary>
-    /// Inicializa en la base de datos de identidad los usuarios y roles necesarios para el funcionamiento de la aplicación
+    /// Inicializa en la base de datos de identidad los usuarios y roles necesarios para el funcionamiento de la aplicaciï¿½n
     /// la primera vez que se ejecuta.
     /// </summary>
     public static class SeedIdentityData
     {
         /// <summary>
-        /// Crea los usuarios y roles necesarios para el funcionamiento de la aplicación si ya no existente.
+        /// Crea los usuarios y roles necesarios para el funcionamiento de la aplicaciï¿½n si ya no existente.
         /// </summary>
         /// <param name="serviceProvider">El <see cref="IServiceProvider"/> al que se han injectado previamente un
         /// <see cref="UserManager<T>"/> y un <see cref="RoleManager<T>"/>.</param>
@@ -29,7 +29,7 @@ namespace RazorPagesMovie.Areas.Identity.Data
 
         private static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            // Crea el primer y único administrador si no existe. Primero crea un usuario y luego se asigna el rol de adminstrador.
+            // Crea el primer y ï¿½nico administrador si no existe. Primero crea un usuario y luego se asigna el rol de adminstrador.
             if (userManager.FindByNameAsync(IdentityData.AdminUserName).Result == null)
             {
                 ApplicationUser user = new ApplicationUser();
@@ -37,9 +37,9 @@ namespace RazorPagesMovie.Areas.Identity.Data
                 user.UserName = IdentityData.AdminUserName;
                 user.Email = IdentityData.AdminMail;
                 user.DOB = IdentityData.AdminDOB;
-                // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquí para poder
-                // buscar por rol después cuando no hay acceso a RoleManager.
-                user.Role = IdentityData.AdminRoleName;
+                // Es necesario tener acceso a RoleManager para poder buscar el rol de este usuario; se asigna aquÃ­ para poder
+                // buscar por rol despuÃ©s cuando no hay acceso a RoleManager.
+                user.AssignRole(userManager, IdentityData.AdminRoleName);
 
                 IdentityResult result = userManager.CreateAsync(user, IdentityData.AdminPassword).Result;
 

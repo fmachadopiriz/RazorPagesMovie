@@ -12,17 +12,17 @@ namespace RazorPagesMovie.Areas.Identity.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            var userManager = serviceProvider.GetRequiredService<UserManager<RazorPagesMovieUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             SeedRoles(roleManager);
             SeedUsers(userManager);
         }
 
-        private static void SeedUsers(UserManager<RazorPagesMovieUser> userManager)
+        private static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
             if (userManager.FindByNameAsync(IdentityData.AdminUserName).Result == null)
             {
-                RazorPagesMovieUser user = new RazorPagesMovieUser();
+                ApplicationUser user = new ApplicationUser();
                 user.Name = IdentityData.AdminName;
                 user.UserName = IdentityData.AdminUserName;
                 user.Email = IdentityData.AdminMail;

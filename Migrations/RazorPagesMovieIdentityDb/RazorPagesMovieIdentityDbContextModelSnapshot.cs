@@ -7,7 +7,7 @@ using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 {
-    [DbContext(typeof(RazorPagesMovieIdentityDbContext))]
+    [DbContext(typeof(IdentityContext))]
     partial class RazorPagesMovieIdentityDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

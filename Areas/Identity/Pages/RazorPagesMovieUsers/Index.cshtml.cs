@@ -11,14 +11,14 @@ namespace RazorPagesMovie.Areas.Identity.Pages.RazorPagesMovieUsers
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext _context;
+        private readonly RazorPagesMovie.Areas.Identity.Data.IdentityContext _context;
 
-        public IndexModel(RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext context)
+        public IndexModel(RazorPagesMovie.Areas.Identity.Data.IdentityContext context)
         {
             _context = context;
         }
 
-        public IList<RazorPagesMovieUser> RazorPagesMovieUser { get;set; }
+        public IList<ApplicationUser> RazorPagesMovieUser { get;set; }
 
         public async Task OnGetAsync()
         {

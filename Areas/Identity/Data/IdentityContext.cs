@@ -9,9 +9,9 @@ using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie.Areas.Identity.Data
 {
-    public class RazorPagesMovieIdentityDbContext : IdentityDbContext<RazorPagesMovieUser>
+    public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
-        public RazorPagesMovieIdentityDbContext(DbContextOptions<RazorPagesMovieIdentityDbContext> options)
+        public IdentityContext(DbContextOptions<IdentityContext> options)
             : base(options)
         {
         }

@@ -43,7 +43,7 @@ namespace RazorPagesMovie
             // its fully qualified name using exact case when running dotnet aspnet-codegenerator razorpage -m RazorPagesMovieUser
             // -dc RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext -udl -outDir Areas\Identity\Pages\RazorPagesMovieUsers
             // --referenceScriptLibraries
-            services.AddDbContext<RazorPagesMovieIdentityDbContext>(options =>
+            services.AddDbContext<IdentityContext>(options =>
                  options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
 
             services.AddMvc(config =>

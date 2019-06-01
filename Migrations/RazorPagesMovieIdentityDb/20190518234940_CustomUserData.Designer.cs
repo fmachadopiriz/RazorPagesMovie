@@ -8,7 +8,7 @@ using RazorPagesMovie.Areas.Identity.Data;
 
 namespace RazorPagesMovie.Migrations.RazorPagesMovieIdentityDb
 {
-    [DbContext(typeof(RazorPagesMovieIdentityDbContext))]
+    [DbContext(typeof(IdentityContext))]
     [Migration("20190518234940_CustomUserData")]
     partial class CustomUserData
     {

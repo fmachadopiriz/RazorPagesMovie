@@ -9,7 +9,7 @@ using RazorPagesMovie.Areas.Identity.Data;
 namespace RazorPagesMovie.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20190601232858_InitialCreate")]
+    [Migration("20190601234142_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

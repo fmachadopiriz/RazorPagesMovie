@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
-namespace RazorPagesMovie.Areas.Identity.Pages.RazorPagesMovieUsers
+namespace RazorPagesMovie.Areas.Identity.Pages.Users
 {
+    [Authorize(Roles=IdentityData.AdminRoleName)] // Solo los usuarios con rol administrador pueden acceder a este controlador
     public class DetailsModel : PageModel
     {
         private readonly RazorPagesMovie.Areas.Identity.Data.IdentityContext _context;
@@ -18,7 +20,7 @@ namespace RazorPagesMovie.Areas.Identity.Pages.RazorPagesMovieUsers
             _context = context;
         }
 
-        public ApplicationUser RazorPagesMovieUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -27,9 +29,9 @@ namespace RazorPagesMovie.Areas.Identity.Pages.RazorPagesMovieUsers
                 return NotFound();
             }
 
-            RazorPagesMovieUser = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            ApplicationUser = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (RazorPagesMovieUser == null)
+            if (ApplicationUser == null)
             {
                 return NotFound();
             }

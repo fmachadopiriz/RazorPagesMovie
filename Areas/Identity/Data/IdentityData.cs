@@ -15,5 +15,7 @@ namespace RazorPagesMovie.Areas.Identity.Data
         public const string AdminPassword = "P@55w0rd";
 
         public const string AdminRoleName = "Administrator";
+
+        public static string[] NonAdminRoleNames = new string[] { "Cliente", "Técnico" };
     }
 }

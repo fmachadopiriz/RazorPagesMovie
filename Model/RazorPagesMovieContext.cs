@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Models
 {
@@ -10,5 +11,7 @@ namespace RazorPagesMovie.Models
         }
 
         public DbSet<RazorPagesMovie.Models.Movie> Movie { get; set; }
+
+        public DbSet<RazorPagesMovie.Models.Actor> Actor { get; set; }
     }
 }

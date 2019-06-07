@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace RazorPagesMovie.Models
 {
@@ -30,5 +31,7 @@ namespace RazorPagesMovie.Models
         [StringLength(5)]
         [Required]
         public string Rating { get; set; }
+
+        public IList<Appereance> Appeareances { get; set; }
     }
 }

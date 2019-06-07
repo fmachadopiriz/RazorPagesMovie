@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RazorPagesMovie.Models.MoviesViewModel;
 
 namespace RazorPagesMovie.Pages.Movies
 {
@@ -19,37 +20,49 @@ namespace RazorPagesMovie.Pages.Movies
             _context = context;
         }
 
-        public IList<Movie> Movie { get; set; }
+        //public IList<Movie> Movie { get; set; }
+        public MovieIndexData Movie { get; set; }
+
+        public int MovieID { get; set; }
+
+        public int ActorID { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
         public SelectList Genres { get; set; }
-        [BindProperty(SupportsGet = true)]
 
+        [BindProperty(SupportsGet = true)]
         public string MovieGenre { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id, int? actorID)
         {
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movie
                                             orderby m.Genre
                                             select m.Genre;
-
-            var movies = from m in _context.Movie
-                         select m;
-
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                movies = movies.Where(s => s.Title.Contains(SearchString));
-            }
-
-            if (!string.IsNullOrEmpty(MovieGenre))
-            {
-                movies = movies.Where(x => x.Genre == MovieGenre);
-            }
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
-            Movie = await movies.ToListAsync();
+
+            Movie = new MovieIndexData();
+            Movie.Movies = await _context.Movie
+                .Where(s => !string.IsNullOrEmpty(SearchString) ? s.Title.Contains(SearchString) : true)
+                .Where(x => !string.IsNullOrEmpty(MovieGenre) ? x.Genre == MovieGenre : true)
+                .Include(c => c.Appeareances)
+                    .ThenInclude(c => c.Actor)
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (id != null)
+            {
+                MovieID = id.Value;
+                Movie movie = Movie.Movies.Where(m => m.ID == id.Value).Single();
+                Movie.Actors = movie.Appeareances.Select(a => a.Actor);
+            }
+
+            if (actorID != null)
+            {
+                ActorID = id.Value;
+            }
         }
     }
 }

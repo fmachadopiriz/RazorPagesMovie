@@ -13,12 +13,6 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Actor.AwardedBestActor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Actor.AwardedBestActor)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Actor.Name)
         </dt>
         <dd class="col-sm-10">
@@ -30,8 +24,14 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Actor.BirthDate)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.AwardedBestActor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Actor.AwardedBestActor)
+        </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Actor.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

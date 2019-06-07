@@ -6,3 +6,22 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+<div class="row">
+    <div class="col-lg-1">
+        <form asp-page-handler="action1" method="post">
+            <button class="btn btn-default">Action 1</button>
+        </form>
+    </div>
+    <div class="col-lg-1">
+        <form asp-page-handler="action2" method="post">
+            <button class="btn btn-default">Action 2</button>
+        </form>
+    </div>
+    <div class="col-lg-1">
+        <form asp-page-handler="action3" method="post">
+            <button class="btn btn-default">Action 3</button>
+        </form>
+    </div>
+</div>
+<h3 class="clearfix">@Model.Message</h3>

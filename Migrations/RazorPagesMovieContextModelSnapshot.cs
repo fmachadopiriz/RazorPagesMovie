@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RazorPagesMovie.Models;
 
-namespace RazorPagesMovie.Migrations.RazorPagesMovie
+namespace RazorPagesMovie.Migrations
 {
     [DbContext(typeof(RazorPagesMovieContext))]
-    [Migration("20190604141022_Actors")]
-    partial class Actors
+    partial class RazorPagesMovieContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +32,19 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovie
                     b.HasKey("ID");
 
                     b.ToTable("Actor");
+                });
+
+            modelBuilder.Entity("RazorPagesMovie.Models.Appereance", b =>
+                {
+                    b.Property<int>("ActorID");
+
+                    b.Property<int>("MovieID");
+
+                    b.HasKey("ActorID", "MovieID");
+
+                    b.HasIndex("MovieID");
+
+                    b.ToTable("Appereance");
                 });
 
             modelBuilder.Entity("RazorPagesMovie.Models.Movie", b =>
@@ -61,6 +72,19 @@ namespace RazorPagesMovie.Migrations.RazorPagesMovie
                     b.HasKey("ID");
 
                     b.ToTable("Movie");
+                });
+
+            modelBuilder.Entity("RazorPagesMovie.Models.Appereance", b =>
+                {
+                    b.HasOne("RazorPagesMovie.Models.Actor", "Actor")
+                        .WithMany("Appereances")
+                        .HasForeignKey("ActorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RazorPagesMovie.Models.Movie", "Movie")
+                        .WithMany("Appeareances")
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

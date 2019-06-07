@@ -9,13 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace RazorPagesMovie.Areas.Identity.Data
 {
     /// <summary>
-    /// Inicializa en la base de datos de identidad los usuarios y roles necesarios para el funcionamiento de la aplicaci�n
+    /// Inicializa en la base de datos de identidad los usuarios y roles necesarios para el funcionamiento de la aplicación
     /// la primera vez que se ejecuta.
     /// </summary>
     public static class SeedIdentityData
     {
         /// <summary>
-        /// Crea los usuarios y roles necesarios para el funcionamiento de la aplicaci�n si ya no existente.
+        /// Crea los usuarios y roles necesarios para el funcionamiento de la aplicación si ya no existente.
         /// </summary>
         /// <param name="serviceProvider">El <see cref="IServiceProvider"/> al que se han injectado previamente un
         /// <see cref="UserManager<T>"/> y un <see cref="RoleManager<T>"/>.</param>
@@ -29,7 +29,7 @@ namespace RazorPagesMovie.Areas.Identity.Data
 
         private static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            // Crea el primer y �nico administrador si no existe. Primero crea un usuario y luego se asigna el rol de adminstrador.
+            // Crea el primer y único administrador si no existe. Primero crea un usuario y luego se asigna el rol de adminstrador.
             if (userManager.FindByNameAsync(IdentityData.AdminUserName).Result == null)
             {
                 ApplicationUser user = new ApplicationUser();

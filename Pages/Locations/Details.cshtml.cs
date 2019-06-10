@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Models;
 
-namespace RazorPagesMovie.Pages.Movies
+namespace RazorPagesMovie.Pages.Locations
 {
     public class DetailsModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace RazorPagesMovie.Pages.Movies
             _context = context;
         }
 
-        public Movie Movie { get; set; }
+        public Location Location { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,9 +27,10 @@ namespace RazorPagesMovie.Pages.Movies
                 return NotFound();
             }
 
-            Movie = await _context.Movies.FirstOrDefaultAsync(m => m.ID == id);
+            Location = await _context.Location
+                .Include(l => l.Movie).FirstOrDefaultAsync(m => m.MovieID == id);
 
-            if (Movie == null)
+            if (Location == null)
             {
                 return NotFound();
             }

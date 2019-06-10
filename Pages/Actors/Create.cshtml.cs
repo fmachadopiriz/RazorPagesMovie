@@ -33,7 +33,7 @@ namespace RazorPagesMovie.Pages_Actors
                 return Page();
             }
 
-            _context.Actor.Add(Actor);
+            _context.Actors.Add(Actor);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorPagesMovie.Models;
 
-namespace RazorPagesMovie.Pages.Movies
+namespace RazorPagesMovie.Pages.Locations
 {
     public class CreateModel : PageModel
     {
@@ -20,11 +20,12 @@ namespace RazorPagesMovie.Pages.Movies
 
         public IActionResult OnGet()
         {
+        ViewData["MovieID"] = new SelectList(_context.Movies, "ID", "Genre");
             return Page();
         }
 
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Location Location { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -33,7 +34,7 @@ namespace RazorPagesMovie.Pages.Movies
                 return Page();
             }
 
-            _context.Movies.Add(Movie);
+            _context.Location.Add(Location);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

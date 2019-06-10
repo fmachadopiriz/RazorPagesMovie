@@ -28,7 +28,7 @@ namespace RazorPagesMovie.Pages_Actors
                 return NotFound();
             }
 
-            Actor = await _context.Actor.FirstOrDefaultAsync(m => m.ID == id);
+            Actor = await _context.Actors.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Actor == null)
             {
@@ -44,11 +44,11 @@ namespace RazorPagesMovie.Pages_Actors
                 return NotFound();
             }
 
-            Actor = await _context.Actor.FindAsync(id);
+            Actor = await _context.Actors.FindAsync(id);
 
             if (Actor != null)
             {
-                _context.Actor.Remove(Actor);
+                _context.Actors.Remove(Actor);
                 await _context.SaveChangesAsync();
             }
 

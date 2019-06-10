@@ -29,7 +29,8 @@
             <th>Release Date</th>
             <th>Genre</th>
             <th>Price</th>
-             <th>Rating</th>
+            <th>Rating</th>
+            <th>Location</th>
             <th></th>
         </tr>
     </thead>
@@ -56,6 +57,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @if (item.Location != null)
+                    {
+                        @item.Location.Name
+                    }
                 </td>
                 <td>
                     <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |

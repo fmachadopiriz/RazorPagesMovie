@@ -27,7 +27,7 @@ namespace RazorPagesMovie.Pages_Actors
                 return NotFound();
             }
 
-            Actor = await _context.Actor.FirstOrDefaultAsync(m => m.ID == id);
+            Actor = await _context.Actors.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Actor == null)
             {

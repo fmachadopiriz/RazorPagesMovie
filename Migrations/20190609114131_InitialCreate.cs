@@ -8,7 +8,7 @@ namespace RazorPagesMovie.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actor",
+                name: "Actors",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -19,11 +19,11 @@ namespace RazorPagesMovie.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actor", x => x.ID);
+                    table.PrimaryKey("PK_Actors", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movie",
+                name: "Movies",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -36,7 +36,7 @@ namespace RazorPagesMovie.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movie", x => x.ID);
+                    table.PrimaryKey("PK_Movies", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,15 +50,33 @@ namespace RazorPagesMovie.Migrations
                 {
                     table.PrimaryKey("PK_Appereance", x => new { x.ActorID, x.MovieID });
                     table.ForeignKey(
-                        name: "FK_Appereance_Actor_ActorID",
+                        name: "FK_Appereance_Actors_ActorID",
                         column: x => x.ActorID,
-                        principalTable: "Actor",
+                        principalTable: "Actors",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Appereance_Movie_MovieID",
+                        name: "FK_Appereance_Movies_MovieID",
                         column: x => x.MovieID,
-                        principalTable: "Movie",
+                        principalTable: "Movies",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Location",
+                columns: table => new
+                {
+                    MovieID = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Location", x => x.MovieID);
+                    table.ForeignKey(
+                        name: "FK_Location_Movies_MovieID",
+                        column: x => x.MovieID,
+                        principalTable: "Movies",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -75,10 +93,13 @@ namespace RazorPagesMovie.Migrations
                 name: "Appereance");
 
             migrationBuilder.DropTable(
-                name: "Actor");
+                name: "Location");
 
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "Actors");
+
+            migrationBuilder.DropTable(
+                name: "Movies");
         }
     }
 }

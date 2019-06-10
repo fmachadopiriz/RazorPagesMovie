@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Models;
 
-namespace RazorPagesMovie.Pages_Actors
+namespace RazorPagesMovie.Pages.Locations
 {
     public class EditModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace RazorPagesMovie.Pages_Actors
         }
 
         [BindProperty]
-        public Actor Actor { get; set; }
+        public Location Location { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,12 +29,14 @@ namespace RazorPagesMovie.Pages_Actors
                 return NotFound();
             }
 
-            Actor = await _context.Actors.FirstOrDefaultAsync(m => m.ID == id);
+            Location = await _context.Location
+                .Include(l => l.Movie).FirstOrDefaultAsync(m => m.MovieID == id);
 
-            if (Actor == null)
+            if (Location == null)
             {
                 return NotFound();
             }
+           ViewData["MovieID"] = new SelectList(_context.Movies, "ID", "Genre");
             return Page();
         }
 
@@ -45,7 +47,7 @@ namespace RazorPagesMovie.Pages_Actors
                 return Page();
             }
 
-            _context.Attach(Actor).State = EntityState.Modified;
+            _context.Attach(Location).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +55,7 @@ namespace RazorPagesMovie.Pages_Actors
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ActorExists(Actor.ID))
+                if (!LocationExists(Location.MovieID))
                 {
                     return NotFound();
                 }
@@ -66,9 +68,9 @@ namespace RazorPagesMovie.Pages_Actors
             return RedirectToPage("./Index");
         }
 
-        private bool ActorExists(int id)
+        private bool LocationExists(int id)
         {
-            return _context.Actors.Any(e => e.ID == id);
+            return _context.Location.Any(e => e.MovieID == id);
         }
     }
 }

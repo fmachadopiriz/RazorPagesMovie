@@ -33,5 +33,7 @@ namespace RazorPagesMovie.Models
         public string Rating { get; set; }
 
         public IList<Appereance> Appeareances { get; set; }
+
+        public Location Location { get; set; }
     }
 }

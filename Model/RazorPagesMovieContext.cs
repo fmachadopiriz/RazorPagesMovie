@@ -10,11 +10,13 @@ namespace RazorPagesMovie.Models
         {
         }
 
-        public DbSet<RazorPagesMovie.Models.Movie> Movie { get; set; }
+        public DbSet<RazorPagesMovie.Models.Movie> Movies { get; set; }
 
-        public DbSet<RazorPagesMovie.Models.Actor> Actor { get; set; }
+        public DbSet<RazorPagesMovie.Models.Actor> Actors { get; set; }
 
         public DbSet<Appereance> Appereances { get; set; }
+
+        public DbSet<Location> Location { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

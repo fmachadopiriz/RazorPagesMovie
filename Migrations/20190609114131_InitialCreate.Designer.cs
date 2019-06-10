@@ -9,7 +9,7 @@ using RazorPagesMovie.Models;
 namespace RazorPagesMovie.Migrations
 {
     [DbContext(typeof(RazorPagesMovieContext))]
-    [Migration("20190607185635_InitialCreate")]
+    [Migration("20190609114131_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace RazorPagesMovie.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("RazorPagesMovie.Models.Appereance", b =>
@@ -47,6 +47,19 @@ namespace RazorPagesMovie.Migrations
                     b.HasIndex("MovieID");
 
                     b.ToTable("Appereance");
+                });
+
+            modelBuilder.Entity("RazorPagesMovie.Models.Location", b =>
+                {
+                    b.Property<int>("MovieID");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("MovieID");
+
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("RazorPagesMovie.Models.Movie", b =>
@@ -73,7 +86,7 @@ namespace RazorPagesMovie.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("RazorPagesMovie.Models.Appereance", b =>
@@ -86,6 +99,14 @@ namespace RazorPagesMovie.Migrations
                     b.HasOne("RazorPagesMovie.Models.Movie", "Movie")
                         .WithMany("Appeareances")
                         .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RazorPagesMovie.Models.Location", b =>
+                {
+                    b.HasOne("RazorPagesMovie.Models.Movie", "Movie")
+                        .WithOne("Location")
+                        .HasForeignKey("RazorPagesMovie.Models.Location", "MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

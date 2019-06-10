@@ -17,18 +17,19 @@ namespace RazorPagesMovie.Models
                 SeedActors(context);
                 SeedMovies(context);
                 SeedAppereances(context);
+                SeedLocations(context);
             }
         }
 
         private static void SeedMovies(RazorPagesMovieContext context)
         {
             // Look for any movies.
-            if (context.Movie.Any())
+            if (context.Movies.Any())
             {
                 return;   // DB has been seeded
             }
 
-            context.Movie.AddRange(
+            context.Movies.AddRange(
                 new Movie
                 {
                     Title = "When Harry Met Sally",
@@ -71,12 +72,12 @@ namespace RazorPagesMovie.Models
         private static void SeedActors(RazorPagesMovieContext context)
         {
             // Look for any actor.
-            if (context.Actor.Any())
+            if (context.Actors.Any())
             {
                 return;   // DB has been seeded
             }
 
-            context.Actor.AddRange(
+            context.Actors.AddRange(
                 new Actor
                 {
                     Name = "Billy Crystal",
@@ -141,61 +142,61 @@ namespace RazorPagesMovie.Models
             {
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Billy Crystal").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "When Harry Met Sally").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Billy Crystal").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "When Harry Met Sally").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Meg Ryan").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "When Harry Met Sally").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Meg Ryan").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "When Harry Met Sally").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Bill Murray").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Bill Murray").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Dan Aykroyd").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Dan Aykroyd").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Sigourney Weaver").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Sigourney Weaver").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Bill Murray").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters 2").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Bill Murray").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters 2").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Dan Aykroyd").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters 2").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Dan Aykroyd").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters 2").ID
                 },
 
                 new Appereance
                 {
-                    ActorID = context.Actor.Single(a => a.Name == "Sigourney Weaver").ID,
-                    MovieID = context.Movie.Single(m => m.Title == "Ghostbusters 2").ID
+                    ActorID = context.Actors.Single(a => a.Name == "Sigourney Weaver").ID,
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters 2").ID
                 },
 
                  new Appereance
                  {
-                     ActorID = context.Actor.Single(a => a.Name == "John Wayne").ID,
-                     MovieID = context.Movie.Single(m => m.Title == "Rio Bravo").ID
+                     ActorID = context.Actors.Single(a => a.Name == "John Wayne").ID,
+                     MovieID = context.Movies.Single(m => m.Title == "Rio Bravo").ID
                  },
 
                  new Appereance {
-                     ActorID = context.Actor.Single(a => a.Name == "Dean Martin").ID,
-                     MovieID = context.Movie.Single(m => m.Title == "Rio Bravo").ID
+                     ActorID = context.Actors.Single(a => a.Name == "Dean Martin").ID,
+                     MovieID = context.Movies.Single(m => m.Title == "Rio Bravo").ID
                  }
             };
 
@@ -205,6 +206,43 @@ namespace RazorPagesMovie.Models
             }
             context.SaveChanges();
         }
+
+                private static void SeedLocations(RazorPagesMovieContext context)
+        {
+            // Look for any movies.
+            if (context.Location.Any())
+            {
+                return;   // DB has been seeded
+            }
+
+            context.Location.AddRange(
+                new Location
+                {
+                    MovieID = context.Movies.Single(m => m.Title == "When Harry Met Sally").ID,
+                    Name = "New York"
+                },
+
+                new Location
+                {
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters").ID,
+                    Name = "New York"
+                },
+
+                new Location
+                {
+                    MovieID = context.Movies.Single(m => m.Title == "Ghostbusters 2").ID,
+                    Name = "New York"
+                },
+
+                new Location
+                {
+                    MovieID = context.Movies.Single(m => m.Title == "Rio Bravo").ID,
+                    Name = "Tucson"
+                }
+            );
+            context.SaveChanges();
+        }
+
     }
 }
 

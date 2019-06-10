@@ -38,15 +38,16 @@ namespace RazorPagesMovie.Pages.Movies
         public async Task OnGetAsync(int? id, int? actorID)
         {
             // Use LINQ to get list of genres.
-            IQueryable<string> genreQuery = from m in _context.Movie
+            IQueryable<string> genreQuery = from m in _context.Movies
                                             orderby m.Genre
                                             select m.Genre;
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
 
             Movie = new MovieIndexData();
-            Movie.Movies = await _context.Movie
+            Movie.Movies = await _context.Movies
                 .Where(s => !string.IsNullOrEmpty(SearchString) ? s.Title.Contains(SearchString) : true)
                 .Where(x => !string.IsNullOrEmpty(MovieGenre) ? x.Genre == MovieGenre : true)
+                .Include(l => l.Location)
                 .Include(c => c.Appeareances)
                     .ThenInclude(c => c.Actor)
                 .AsNoTracking()

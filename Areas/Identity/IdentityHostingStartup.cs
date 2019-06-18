@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPagesMovie.Areas.Identity.Data;
+using RazorPagesMovie.Models;
 
 [assembly: HostingStartup(typeof(RazorPagesMovie.Areas.Identity.IdentityHostingStartup))]
 namespace RazorPagesMovie.Areas.Identity
@@ -17,7 +18,7 @@ namespace RazorPagesMovie.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDefaultIdentity<ApplicationUser>()
                     .AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<IdentityContext>();
+                    .AddEntityFrameworkStores<ApplicationContext>();
             });
         }
     }

@@ -11,9 +11,9 @@ namespace RazorPagesMovie.Pages.Locations
 {
     public class DeleteModel : PageModel
     {
-        private readonly RazorPagesMovie.Models.RazorPagesMovieContext _context;
+        private readonly RazorPagesMovie.Models.ApplicationContext _context;
 
-        public DeleteModel(RazorPagesMovie.Models.RazorPagesMovieContext context)
+        public DeleteModel(RazorPagesMovie.Models.ApplicationContext context)
         {
             _context = context;
         }

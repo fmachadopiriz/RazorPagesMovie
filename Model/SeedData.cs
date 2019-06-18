@@ -10,9 +10,9 @@ namespace RazorPagesMovie.Models
 
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new RazorPagesMovieContext(
+            using (var context = new ApplicationContext(
                 serviceProvider.GetRequiredService<
-                    DbContextOptions<RazorPagesMovieContext>>()))
+                    DbContextOptions<ApplicationContext>>()))
             {
                 SeedActors(context);
                 SeedMovies(context);
@@ -21,7 +21,7 @@ namespace RazorPagesMovie.Models
             }
         }
 
-        private static void SeedMovies(RazorPagesMovieContext context)
+        private static void SeedMovies(ApplicationContext context)
         {
             // Look for any movies.
             if (context.Movies.Any())
@@ -69,7 +69,7 @@ namespace RazorPagesMovie.Models
             context.SaveChanges();
         }
 
-        private static void SeedActors(RazorPagesMovieContext context)
+        private static void SeedActors(ApplicationContext context)
         {
             // Look for any actor.
             if (context.Actors.Any())
@@ -130,7 +130,7 @@ namespace RazorPagesMovie.Models
             context.SaveChanges();
         }
 
-        private static void SeedAppereances(RazorPagesMovieContext context)
+        private static void SeedAppereances(ApplicationContext context)
         {
             // Look for any appereance.
             if (context.Appereances.Any())
@@ -207,7 +207,7 @@ namespace RazorPagesMovie.Models
             context.SaveChanges();
         }
 
-                private static void SeedLocations(RazorPagesMovieContext context)
+                private static void SeedLocations(ApplicationContext context)
         {
             // Look for any movies.
             if (context.Location.Any())

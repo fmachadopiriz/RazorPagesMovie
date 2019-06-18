@@ -22,7 +22,7 @@ namespace RazorPagesMovie
                 try
                 {
                     var context=services.
-                        GetRequiredService<RazorPagesMovieContext>();
+                        GetRequiredService<ApplicationContext>();
                     context.Database.Migrate();
                     SeedData.Initialize(services);
                     SeedIdentityData.Initialize(services);

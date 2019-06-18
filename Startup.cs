@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RazorPagesMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using RazorPagesMovie.Areas.Identity.Data;
+using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie
 {
@@ -36,15 +30,8 @@ namespace RazorPagesMovie
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<RazorPagesMovieContext>(options =>
+            services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
-
-            // Fix error More than one DbContext named 'RazorPagesMovieIdentityDbContext' was found Specify which one to use by providing
-            // its fully qualified name using exact case when running dotnet aspnet-codegenerator razorpage -m ApplicationUser
-            // -dc RazorPagesMovie.Areas.Identity.Data.RazorPagesMovieIdentityDbContext -udl -outDir Areas\Identity\Pages\ApplicationUsers
-            // --referenceScriptLibraries
-            services.AddDbContext<IdentityContext>(options =>
-                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
 
             services.AddMvc(config =>
             {

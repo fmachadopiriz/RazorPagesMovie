@@ -12,9 +12,9 @@ namespace RazorPagesMovie.Pages.Locations
 {
     public class EditModel : PageModel
     {
-        private readonly RazorPagesMovie.Models.RazorPagesMovieContext _context;
+        private readonly RazorPagesMovie.Models.ApplicationContext _context;
 
-        public EditModel(RazorPagesMovie.Models.RazorPagesMovieContext context)
+        public EditModel(RazorPagesMovie.Models.ApplicationContext context)
         {
             _context = context;
         }

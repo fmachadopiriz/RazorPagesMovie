@@ -11,9 +11,9 @@ namespace RazorPagesMovie.Pages.Locations
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesMovie.Models.RazorPagesMovieContext _context;
+        private readonly RazorPagesMovie.Models.ApplicationContext _context;
 
-        public IndexModel(RazorPagesMovie.Models.RazorPagesMovieContext context)
+        public IndexModel(RazorPagesMovie.Models.ApplicationContext context)
         {
             _context = context;
         }

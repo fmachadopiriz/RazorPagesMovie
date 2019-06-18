@@ -13,9 +13,9 @@ namespace RazorPagesMovie.Areas.Identity.Pages.Users
     [Authorize(Roles=IdentityData.AdminRoleName)] // Solo los usuarios con rol administrador pueden acceder a este controlador
     public class IndexModel : PageModel
     {
-        private readonly RazorPagesMovie.Areas.Identity.Data.IdentityContext _context;
+        private readonly RazorPagesMovie.Models.ApplicationContext _context;
 
-        public IndexModel(RazorPagesMovie.Areas.Identity.Data.IdentityContext context)
+        public IndexModel(RazorPagesMovie.Models.ApplicationContext context)
         {
             _context = context;
         }

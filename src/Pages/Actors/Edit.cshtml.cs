@@ -29,7 +29,7 @@ namespace RazorPagesMovie.Pages_Actors
                 return NotFound();
             }
 
-            Actor = await _context.Actors.FirstOrDefaultAsync(m => m.ID == id);
+            Actor = await _context.GetActorByIdAsync(id);
 
             if (Actor == null)
             {
@@ -53,7 +53,7 @@ namespace RazorPagesMovie.Pages_Actors
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ActorExists(Actor.ID))
+                if (!_context.ActorExists(Actor.ID))
                 {
                     return NotFound();
                 }
@@ -64,11 +64,6 @@ namespace RazorPagesMovie.Pages_Actors
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool ActorExists(int id)
-        {
-            return _context.Actors.Any(e => e.ID == id);
         }
     }
 }

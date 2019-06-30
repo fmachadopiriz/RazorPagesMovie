@@ -35,5 +35,34 @@ namespace RazorPagesMovie.Models
         public DbSet<Appereance> Appereances { get; set; }
 
         public DbSet<Location> Location { get; set; }
+
+        public bool ActorExists(int id)
+        {
+            return this.Actors.Any(e => e.ID == id);
+        }
+
+        public async virtual Task<List<RazorPagesMovie.Models.Actor>> GetActorsAsync()
+        {
+            return await this.Actors
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public Task<Actor> GetActorByIdAsync(int? id)
+        {
+            return this.Actors.FirstOrDefaultAsync(m => m.ID == id);
+        }
+
+        public Task<int> AddActorAsync(Actor actor)
+        {
+            this.Actors.Add(actor);
+            return this.SaveChangesAsync();
+        }
+
+        public Task<int> RemoveActorAsync(Actor actor)
+        {
+            this.Actors.Remove(actor);
+            return this.SaveChangesAsync();
+        }
     }
 }

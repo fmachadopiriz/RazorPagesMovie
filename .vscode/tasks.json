@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/RazorPagesMovie.csproj"
+                "${workspaceFolder}/src/RazorPagesMovie.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/RazorPagesMovie.csproj"
+                "${workspaceFolder}/src/RazorPagesMovie.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/RazorPagesMovie.csproj"
+                "${workspaceFolder}/src/RazorPagesMovie.csproj"
             ],
             "problemMatcher": "$tsc"
         }

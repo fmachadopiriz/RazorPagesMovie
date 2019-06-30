@@ -2,11 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace RazorPagesMovie.Models
 {
     public static class SeedData
     {
+        public static void Initialize(ApplicationContext context)
+        {
+            SeedActors(context);
+            SeedMovies(context);
+            SeedAppereances(context);
+            SeedLocations(context);
+        }
 
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -29,7 +37,14 @@ namespace RazorPagesMovie.Models
                 return;   // DB has been seeded
             }
 
-            context.Movies.AddRange(
+            context.Movies.AddRange(GetSeedingMovies());
+            context.SaveChanges();
+        }
+
+        public static List<Movie> GetSeedingMovies()
+        {
+            return new List<Movie>()
+            {
                 new Movie
                 {
                     Title = "When Harry Met Sally",
@@ -65,8 +80,7 @@ namespace RazorPagesMovie.Models
                     Price = 3.99M,
                     Rating = "R"
                 }
-            );
-            context.SaveChanges();
+            };
         }
 
         private static void SeedActors(ApplicationContext context)
@@ -77,7 +91,14 @@ namespace RazorPagesMovie.Models
                 return;   // DB has been seeded
             }
 
-            context.Actors.AddRange(
+            context.Actors.AddRange(GetSeedingActors());
+            context.SaveChanges();
+        }
+
+        public static List<Actor> GetSeedingActors()
+        {
+            return new List<Actor>()
+            {
                 new Actor
                 {
                     Name = "Billy Crystal",
@@ -126,8 +147,7 @@ namespace RazorPagesMovie.Models
                     BirthDate = DateTime.Parse("1917-7-7"),
                     AwardedBestActor = false
                 }
-            );
-            context.SaveChanges();
+            };
         }
 
         private static void SeedAppereances(ApplicationContext context)
@@ -138,7 +158,16 @@ namespace RazorPagesMovie.Models
                 return;   // DB has been seeded
             }
 
-            var appereances = new Appereance[]
+            foreach (Appereance a in GetSeedingAppereances(context))
+            {
+                context.Appereances.Add(a);
+            }
+            context.SaveChanges();
+        }
+
+        public static List<Appereance> GetSeedingAppereances(ApplicationContext context)
+        {
+            return new List<Appereance>()
             {
                 new Appereance
                 {
@@ -200,14 +229,10 @@ namespace RazorPagesMovie.Models
                  }
             };
 
-            foreach (Appereance a in appereances)
-            {
-                context.Appereances.Add(a);
-            }
-            context.SaveChanges();
+
         }
 
-                private static void SeedLocations(ApplicationContext context)
+        private static void SeedLocations(ApplicationContext context)
         {
             // Look for any movies.
             if (context.Location.Any())
@@ -215,7 +240,14 @@ namespace RazorPagesMovie.Models
                 return;   // DB has been seeded
             }
 
-            context.Location.AddRange(
+            context.Location.AddRange(GetSeedingLocations(context));
+            context.SaveChanges();
+        }
+
+        public static List<Location> GetSeedingLocations(ApplicationContext context)
+        {
+            return new List<Location>()
+            {
                 new Location
                 {
                     MovieID = context.Movies.Single(m => m.Title == "When Harry Met Sally").ID,
@@ -239,11 +271,7 @@ namespace RazorPagesMovie.Models
                     MovieID = context.Movies.Single(m => m.Title == "Rio Bravo").ID,
                     Name = "Tucson"
                 }
-            );
-            context.SaveChanges();
+            };
         }
-
     }
 }
-
-
